@@ -23,6 +23,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bozoslivehere.fumble.R;
+import com.bozoslivehere.fumble.adapters.MenuAdapter;
+import com.bozoslivehere.fumble.adapters.items.AdapterItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -55,6 +60,7 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
+    private MenuAdapter mMenuAdapter;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -99,14 +105,21 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+
+        List<AdapterItem> objects = new ArrayList<AdapterItem>();
+        objects.add(new com.bozoslivehere.fumble.adapters.items.MenuItem());
+        objects.add(new com.bozoslivehere.fumble.adapters.items.MenuItem());
+        objects.add(new com.bozoslivehere.fumble.adapters.items.MenuItem());
+
+        //mMenuAdapter = new MenuAdapter(getActionBar().getThemedContext(), R.layout.menu_list_item, objects);
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
                 new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
+                        "foo",
+                        "bar",
+                        "baz",
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -135,7 +148,7 @@ public class NavigationDrawerFragment extends Fragment {
         actionBar.setHomeButtonEnabled(true);
 
         // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
+        // between the navigation drawer and the action bar app iconImageView.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
